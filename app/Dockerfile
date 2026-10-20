@@ -1,5 +1,5 @@
 # Pinned base image (never :latest)
-FROM nginx:1.27-alpine
+FROM nginx:1.27-alpine-slim
 
 # Build identifier, surfaced in index.html and the X-Build-SHA response header
 ARG BUILD_SHA=dev
