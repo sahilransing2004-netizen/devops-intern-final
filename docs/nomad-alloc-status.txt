@@ -1,0 +1,36 @@
+ID                  = dc8b25fc-365a-1716-0952-18f5b5979c9d
+Eval ID             = aa43d310
+Name                = nginx-app.web[0]
+Node ID             = 276641b9
+Node Name           = TITAN
+Job ID              = nginx-app
+Job Version         = 1
+Client Status       = running
+Client Description  = Tasks are running
+Desired Status      = run
+Desired Description = <none>
+Created             = 1m24s ago
+Modified            = 1m5s ago
+Deployment ID       = e701052d
+Deployment Health   = healthy
+
+Allocation Addresses:
+Label  Dynamic  Address
+*http  yes      127.0.0.1:26707 -> 8080
+
+Task "nginx" is "running"
+Task Resources:
+CPU        Memory          Disk     Addresses
+0/100 MHz  7.9 MiB/64 MiB  300 MiB  
+
+Task Events:
+Started At     = 2026-10-20T16:32:40Z
+Finished At    = N/A
+Total Restarts = 0
+Last Restart   = N/A
+
+Recent Events:
+Time                  Type        Description
+2026-10-20T16:32:40Z  Started     Task started by client
+2026-10-20T16:32:39Z  Task Setup  Building Task Directory
+2026-10-20T16:32:39Z  Received    Task received by client
