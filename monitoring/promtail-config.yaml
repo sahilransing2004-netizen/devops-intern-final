@@ -1,0 +1,37 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: nginx-app
+    docker_sd_configs:
+      - host: unix:///var/run/docker.sock
+        refresh_interval: 5s
+    relabel_configs:
+      # Keep only containers whose name starts with the Nomad task name "nginx"
+      # (Nomad names them <task>-<alloc_id>) or the local test container "app".
+      - source_labels: ['__meta_docker_container_name']
+        regex: '/(nginx-[0-9a-f-]{36}|app)'
+        action: keep
+      - target_label: job
+        replacement: nginx-app
+      - source_labels: ['__meta_docker_container_name']
+        regex: '/(.*)'
+        target_label: container
+      - source_labels: ['__meta_docker_container_name']
+        regex: '/nginx-([0-9a-f-]{36})'
+        target_label: nomad_alloc_id
+      - target_label: service
+        replacement: nginx-app
+    pipeline_stages:
+      - regex:
+          expression: '^(?P<remote_addr>\S+) - \S+ \[(?P<time_local>[^\]]+)\] "(?P<method>\S+) (?P<path>\S+) \S+" (?P<status>\d{3}) (?P<bytes>\d+)'
+      - labels:
+          status:
+          method:
