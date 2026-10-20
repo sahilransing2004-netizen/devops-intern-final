@@ -1,0 +1,19 @@
+# IDE metadata
+.idea/
+.vscode/
+*.iml
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets / local env (never commit these)
+.env
+*.pem
+*.key
+
+# Local build / runtime output
+*.tar
+nomad-data/
+consul-data/
